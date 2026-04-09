@@ -17,8 +17,8 @@ export async function POST(request: Request) {
       ? authHeader.split('Bearer ')[1] 
       : null;
 
-    // Use custom API key or fallback to environment variable
-    const apiKey = customApiKey || process.env.GEMINI_API_KEY;
+    const rawApiKey = customApiKey || process.env.GEMINI_API_KEY;
+    const apiKey = rawApiKey?.trim();
 
     if (!apiKey) {
       return NextResponse.json(
